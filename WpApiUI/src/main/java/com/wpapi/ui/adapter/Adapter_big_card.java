@@ -31,14 +31,14 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mpost_image;
-        TextView mpost_title , mpost_date ,mpost_description;
+        TextView mpost_title, mpost_date, mpost_description;
 
         public ViewHolder(View v) {
             super(v);
-            mpost_image = (ImageView)v.findViewById(R.id.post_image);
-            mpost_date = (TextView)v.findViewById(R.id.post_date);
-            mpost_title = (TextView)v.findViewById(R.id.post_title);
-            mpost_description = (TextView)v.findViewById(R.id.post_description);
+            mpost_image = (ImageView) v.findViewById(R.id.post_image);
+            mpost_date = (TextView) v.findViewById(R.id.post_date);
+            mpost_title = (TextView) v.findViewById(R.id.post_title);
+            mpost_description = (TextView) v.findViewById(R.id.post_description);
 
         }
 
@@ -78,7 +78,7 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mPostdata.size();
     }
 
     @Override
@@ -109,7 +109,8 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
         if (holder instanceof ViewHolder) {
 
             ((ViewHolder) holder).mpost_title.setText(mPostdata.get(position).getTitle());
-
+            ((ViewHolder) holder).mpost_description.setText(mPostdata.get(position).getDescription());
+            ((ViewHolder) holder).mpost_date.setText(mPostdata.get(position).getDate());
 
         } else {
             ((ProgressViewHolder) holder).progressBar.setIndeterminate(true);
