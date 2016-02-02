@@ -127,9 +127,15 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
                 }
 
             ((ViewHolder) holder).mpost_title.setText(mPostdata.get(position).getTitle());
-            Picasso.with(context)
-                    .load(R.drawable.demo)
+
+            Picasso picasso = Picasso.with(context);
+            picasso.setIndicatorsEnabled(true);
+            picasso.setLoggingEnabled(true);
+
+            picasso.load("http://i.imgur.com/rFLNqWI.jpg")
                     .fit()
+                    .placeholder(R.drawable.demo)
+                    .error(R.drawable.demo)
                     .into(((ViewHolder) holder).mpost_image);
 
 
