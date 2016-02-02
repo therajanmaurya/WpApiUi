@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             postModel.add(postModel1);
         }
 
-        Adapter_big_card<PostModel> adapter_big_card  = new Adapter_big_card(this , postModel , LayoutUI.google_card );
+        Adapter_big_card<PostModel> adapter_big_card  = new Adapter_big_card(this , postModel , LayoutUI.simple_cardui );
         recyclerView.setAdapter(adapter_big_card);
 
         setContentView(recyclerView);

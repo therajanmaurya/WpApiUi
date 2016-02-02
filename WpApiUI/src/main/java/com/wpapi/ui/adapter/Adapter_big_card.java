@@ -48,15 +48,21 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
 
                     mpost_date = (TextView) v.findViewById(R.id.post_date);
                     mpost_description = (TextView) v.findViewById(R.id.post_description);
+                    mpost_image = (ImageView) v.findViewById(R.id.post_image);
+                    break;
 
                 case cheesesquare:
 
+                    mpost_image = (ImageView) v.findViewById(R.id.post_image);
+                    break;
+
+                case simple_cardui:
+                    mpost_description = (TextView) v.findViewById(R.id.post_description);
+                    break;
 
                 default:
-
             }
 
-            mpost_image = (ImageView) v.findViewById(R.id.post_image);
             mpost_title = (TextView) v.findViewById(R.id.post_title);
 
 
@@ -112,6 +118,10 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
 
+            Picasso picasso = Picasso.with(context);
+            picasso.setIndicatorsEnabled(true);
+            picasso.setLoggingEnabled(true);
+
              switch (UIType)
                 {
                     case google_card:
@@ -119,8 +129,23 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
                         ((ViewHolder) holder).mpost_description.setText(mPostdata.get(position).getDescription());
                         ((ViewHolder) holder).mpost_date.setText(mPostdata.get(position).getDate());
 
+                        picasso.load("http://i.imgur.com/rFLNqWI.jpg")
+                                .fit()
+                                .placeholder(R.drawable.demo)
+                                .error(R.drawable.demo)
+                                .into(((ViewHolder) holder).mpost_image);
+
                     case cheesesquare:
 
+                        picasso.load("http://i.imgur.com/rFLNqWI.jpg")
+                                .fit()
+                                .placeholder(R.drawable.demo)
+                                .error(R.drawable.demo)
+                                .into(((ViewHolder) holder).mpost_image);
+
+                    case simple_cardui:
+
+                        ((ViewHolder) holder).mpost_description.setText(mPostdata.get(position).getDescription());
 
                     default:
 
@@ -128,15 +153,7 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
 
             ((ViewHolder) holder).mpost_title.setText(mPostdata.get(position).getTitle());
 
-            Picasso picasso = Picasso.with(context);
-            picasso.setIndicatorsEnabled(true);
-            picasso.setLoggingEnabled(true);
 
-            picasso.load("http://i.imgur.com/rFLNqWI.jpg")
-                    .fit()
-                    .placeholder(R.drawable.demo)
-                    .error(R.drawable.demo)
-                    .into(((ViewHolder) holder).mpost_image);
 
 
 
