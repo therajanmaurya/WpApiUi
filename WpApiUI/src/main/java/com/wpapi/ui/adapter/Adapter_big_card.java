@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 import com.wpapi.ui.R;
 import com.wpapi.ui.interfaces.IPostModel;
 import com.wpapi.ui.ui.LayoutUI;
@@ -27,7 +29,7 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     int layoutui;
-    LayoutUI UIType;
+    static LayoutUI UIType;
 
 
     /**
@@ -39,28 +41,25 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
 
         public ViewHolder(View v) {
             super(v);
+
+            switch (UIType)
+            {
+                case google_card:
+
+                    mpost_date = (TextView) v.findViewById(R.id.post_date);
+                    mpost_description = (TextView) v.findViewById(R.id.post_description);
+
+                case cheesesquare:
+
+
+                default:
+
+            }
+
             mpost_image = (ImageView) v.findViewById(R.id.post_image);
-            mpost_date = (TextView) v.findViewById(R.id.post_date);
             mpost_title = (TextView) v.findViewById(R.id.post_title);
-            mpost_description = (TextView) v.findViewById(R.id.post_description);
 
-        }
 
-        public ImageView getCoverpost() {
-            return mpost_image;
-        }
-
-        public TextView getTitle() {
-            return mpost_title;
-        }
-
-        public TextView getDate() {
-            return mpost_date;
-        }
-
-        public TextView getsubDescription() {
-
-            return mpost_description;
         }
     }
 
@@ -117,10 +116,10 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
                 {
                     case google_card:
 
-
+                        ((ViewHolder) holder).mpost_description.setText(mPostdata.get(position).getDescription());
+                        ((ViewHolder) holder).mpost_date.setText(mPostdata.get(position).getDate());
 
                     case cheesesquare:
-
 
 
                     default:
@@ -128,8 +127,12 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
                 }
 
             ((ViewHolder) holder).mpost_title.setText(mPostdata.get(position).getTitle());
-            ((ViewHolder) holder).mpost_description.setText(mPostdata.get(position).getDescription());
-            ((ViewHolder) holder).mpost_date.setText(mPostdata.get(position).getDate());
+            Picasso.with(context)
+                    .load(R.drawable.demo)
+                    .fit()
+                    .into(((ViewHolder) holder).mpost_image);
+
+
 
         } else {
             ((ProgressViewHolder) holder).progressBar.setIndeterminate(true);

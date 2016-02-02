@@ -26,17 +26,17 @@ public class MainActivity extends AppCompatActivity {
 
         List<PostModel> postModel  = new ArrayList<>();
 
-        for(int i = 0 ; i<10 ; i++)
+        for(int i = 0 ; i<20 ; i++)
         {
             PostModel postModel1 = new PostModel();
             postModel1.setImageSource("Image");
             postModel1.setDate("1/2/2016");
-            postModel1.setTitle("Title");
+            postModel1.setTitle("This the Demo of the Cheese And Google card ");
             postModel1.setDescription("Description");
             postModel.add(postModel1);
         }
 
-        Adapter_big_card<PostModel> adapter_big_card  = new Adapter_big_card(this , postModel , LayoutUI.google_card);
+        Adapter_big_card<PostModel> adapter_big_card  = new Adapter_big_card(this , postModel , LayoutUI.google_card );
         recyclerView.setAdapter(adapter_big_card);
 
         setContentView(recyclerView);
