@@ -11,6 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.wpapi.ui.R;
 import com.wpapi.ui.interfaces.IPostModel;
+import com.wpapi.ui.ui.LayoutUI;
+
 import java.util.List;
 
 
@@ -24,6 +26,8 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
     Context context;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
+    int layoutui;
+    LayoutUI UIType;
 
 
     /**
@@ -70,9 +74,10 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
     }
 
 
-    public Adapter_big_card(Context activity, @Nullable List<T> postModels) {
+    public Adapter_big_card(Context activity, @Nullable List<T> postModels , LayoutUI layoutUI) {
         this.context = activity;
         this.mPostdata = postModels;
+        UIType = layoutUI;
     }
 
 
@@ -91,7 +96,7 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
         RecyclerView.ViewHolder vh;
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.item_big_cards, parent, false);
+                    LayoutUI.UI_Type(UIType), parent, false);
 
             vh = new ViewHolder(v);
         } else {
@@ -107,6 +112,20 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
+
+             switch (UIType)
+                {
+                    case google_card:
+
+
+
+                    case cheesesquare:
+
+
+
+                    default:
+
+                }
 
             ((ViewHolder) holder).mpost_title.setText(mPostdata.get(position).getTitle());
             ((ViewHolder) holder).mpost_description.setText(mPostdata.get(position).getDescription());
