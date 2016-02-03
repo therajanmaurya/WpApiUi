@@ -6,6 +6,5 @@ package com.wpapi.ui.ui;
 public enum LayoutManagerType {
 
     GRID_LAYOUT_MANAGER,
-    LINEAR_LAYOUT_MANAGER;
-    private int SPAN_COUNT = 2;
+    LINEAR_LAYOUT_MANAGER
 }
