@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemClick
         easy_recyclerView = easy_recyclerView.getRecyclerView(LayoutManagerType.GRID_LAYOUT_MANAGER);
         easy_recyclerView.addOnItemTouchListener(new RecyclerItemClickListner(this, this));
 
-        final Awesome_Adapter<PostModel> awesome_adapter  = new Awesome_Adapter(this , postModel , LayoutUI.google_card );
+        Awesome_Adapter<PostModel> awesome_adapter  = new Awesome_Adapter(this , postModel , LayoutUI.google_card );
         easy_recyclerView.setAdapter(awesome_adapter);
 
         easy_recyclerView.setOnScrollListener(new EndlessRecyclerOnScrollListener((LinearLayoutManager) easy_recyclerView.getLayoutManager()) {

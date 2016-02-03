@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import com.wpapi.ui.ui.LayoutManagerType;
 
 /**
@@ -49,11 +50,13 @@ public class Easy_RecyclerView extends RecyclerView {
      * @param layoutManagerType LayoutType (Grid or Linear)
      * @return Easy_RecyclerView
      */
-    public Easy_RecyclerView getRecyclerView(LayoutManagerType layoutManagerType) {
+    public Easy_RecyclerView getRecyclerView(LayoutManagerType layoutManagerType)
+    {
         int scrollPosition = 0;
         Easy_RecyclerView recyclerView = new Easy_RecyclerView(context);
         setlayoutmanager(layoutManagerType, SPAN_COUNT);
-        if (recyclerView.getLayoutManager() != null) {
+        if (recyclerView.getLayoutManager() != null)
+        {
             scrollPosition = ((LinearLayoutManager) recyclerView.getLayoutManager())
                     .findFirstCompletelyVisibleItemPosition();
         }
@@ -69,9 +72,11 @@ public class Easy_RecyclerView extends RecyclerView {
      * @param layoutManagerType LayoutType
      * @param SPAN_COUNT No. of column in grid
      */
-    public void setlayoutmanager(LayoutManagerType layoutManagerType, int SPAN_COUNT) {
+    public void setlayoutmanager(LayoutManagerType layoutManagerType, int SPAN_COUNT)
+    {
 
-        switch (layoutManagerType) {
+        switch (layoutManagerType)
+        {
             case GRID_LAYOUT_MANAGER:
                 mLayoutManager = new GridLayoutManager(context, SPAN_COUNT);
                 break;
@@ -81,11 +86,6 @@ public class Easy_RecyclerView extends RecyclerView {
             default:
                 mLayoutManager = new LinearLayoutManager(context);
         }
-    }
-
-    public Easy_RecyclerView.LayoutManager getmLayoutManager()
-    {
-        return mLayoutManager;
     }
 
 }

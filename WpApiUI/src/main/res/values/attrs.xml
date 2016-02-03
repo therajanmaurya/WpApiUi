@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Easy_RecyclerView">
+        <attr name="column" format="integer"/>
+        <attr name="LayoutType" format="enum">
+            <enum name="LINEAR_LAYOUT_MANAGER" value="0"/>
+            <enum name="GRID_LAYOUT_MANAGER" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>
