@@ -83,4 +83,9 @@ public class Easy_RecyclerView extends RecyclerView {
         }
     }
 
+    public Easy_RecyclerView.LayoutManager getmLayoutManager()
+    {
+        return mLayoutManager;
+    }
+
 }

@@ -2,12 +2,14 @@ package com.wpapi.ui.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.wpapi.ui.adapter.Awesome_Adapter;
+import com.wpapi.ui.listener.EndlessRecyclerOnScrollListener;
 import com.wpapi.ui.listener.RecyclerItemClickListner;
 import com.wpapi.ui.recyclerview.Easy_RecyclerView;
 import com.wpapi.ui.sample.models.PostModel;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemClick
         super.onCreate(savedInstanceState);
 
 
-        List<PostModel> postModel  = new ArrayList<>();
+        final List<PostModel> postModel  = new ArrayList<>();
         for(int i = 0 ; i<20 ; i++)
         {
             PostModel postModel1 = new PostModel();
@@ -55,8 +57,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemClick
         easy_recyclerView = easy_recyclerView.getRecyclerView(LayoutManagerType.GRID_LAYOUT_MANAGER);
         easy_recyclerView.addOnItemTouchListener(new RecyclerItemClickListner(this, this));
 
-        Awesome_Adapter<PostModel> adapter_big_card  = new Awesome_Adapter(this , postModel , LayoutUI.google_card );
-        easy_recyclerView.setAdapter(adapter_big_card);
+        final Awesome_Adapter<PostModel> awesome_adapter  = new Awesome_Adapter(this , postModel , LayoutUI.google_card );
+        easy_recyclerView.setAdapter(awesome_adapter);
+
+        easy_recyclerView.setOnScrollListener(new EndlessRecyclerOnScrollListener((LinearLayoutManager) easy_recyclerView.getLayoutManager()) {
+            @Override
+            public void onLoadMore(int current_page) {
+                Log.d(LOG_TAG , "Loadmore");
+                /*postModel.add(null);
+                awesome_adapter.notifyDataSetChanged();*/
+            }
+        });
 
         setContentView(easy_recyclerView);
     }
