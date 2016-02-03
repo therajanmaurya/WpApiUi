@@ -212,7 +212,7 @@ public class Awesome_Adapter<T extends IPostModel> extends RecyclerView.Adapter<
                     .error(R.drawable.demo)
                     .into(imageView);
 
-        }catch (IllegalArgumentException e)
+        }catch (IllegalArgumentException | NullPointerException e)
         {
             Log.d(LOG_TAG , "Null image url");
 
