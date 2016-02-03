@@ -3,6 +3,7 @@ package com.wpapi.ui.adapter;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,23 +18,26 @@ import com.wpapi.ui.ui.LayoutUI;
 
 import java.util.List;
 
-
 /**
- * Created by RajanMaurya on 01/02/16.
+ * The Awesome Adapter is the Adapter That makes you easier to make Awesome UI with
+ * No headache only need is just make object pass data and setAdapter
+ *
+ * @author  Rajan Maurya
+ * @version 1.0
+ * @since   1/2/2016
  */
-public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Awesome_Adapter<T extends IPostModel> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private String LOG_TAG = getClass().getSimpleName();
     private List<T> mPostdata;
-    Context context;
+    private Context context;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
-    int layoutui;
     static LayoutUI UIType;
 
 
     /**
-     * Provide a reference to the type of views that you are using (custom ViewHolder)
+     * Custom ViewHolder that describes an item view and metadata about its place within the RecyclerView.
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mpost_image;
@@ -44,18 +48,22 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
 
             switch (UIType)
             {
+                //google card UI
                 case google_card:
 
+                    mpost_image = (ImageView) v.findViewById(R.id.post_image);
                     mpost_date = (TextView) v.findViewById(R.id.post_date);
                     mpost_description = (TextView) v.findViewById(R.id.post_description);
-                    mpost_image = (ImageView) v.findViewById(R.id.post_image);
+
                     break;
 
+                //cheesesquare card ui
                 case cheesesquare:
 
                     mpost_image = (ImageView) v.findViewById(R.id.post_image);
                     break;
 
+                // Simple card ui
                 case simple_cardui:
                     mpost_description = (TextView) v.findViewById(R.id.post_description);
                     break;
@@ -69,6 +77,10 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
         }
     }
 
+
+    /**
+     * Progressbar item ViewHolder in RecyclerView (It shows when load more open triggered in RecyclerView)
+     */
     public static class ProgressViewHolder extends RecyclerView.ViewHolder {
         public ProgressBar progressBar;
 
@@ -79,23 +91,47 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
     }
 
 
-    public Adapter_big_card(Context activity, @Nullable List<T> postModels , LayoutUI layoutUI) {
-        this.context = activity;
+    /**
+     * Constructor To initialize RecyclerView and RecyclerView Item UI Type
+     * @param context Context of Fragment/Activity
+     * @param postModels Model of data to inflate in RecyclerView
+     * @param layoutUI  Ui type like google_card , cheeseSquare , Simple UI
+     */
+    public Awesome_Adapter(Context context, @Nullable List<T> postModels, LayoutUI layoutUI) {
+        this.context = context;
         this.mPostdata = postModels;
         UIType = layoutUI;
     }
 
 
+    /**
+     * It is for setting RecyclerView Size
+     * @return size of RecyclerView
+     */
     @Override
     public int getItemCount() {
         return mPostdata.size();
     }
 
+    /**
+     *
+     * @param position In which putting progressbar
+     * @return RecyclerView Item View
+     */
     @Override
     public int getItemViewType(int position) {
         return mPostdata.get(position) != null ? VIEW_ITEM : VIEW_PROG;
     }
 
+
+    /**
+     *
+     * This is for Setting the UI of RecyclerView Item
+     *
+     * @param parent
+     * @param viewType Progressbar or Beautiful UI
+     * @return Item Ui
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
@@ -114,6 +150,11 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
     }
 
 
+    /**
+     * Binding the data to RecyclerView Item
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
@@ -128,24 +169,18 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
 
                         ((ViewHolder) holder).mpost_description.setText(mPostdata.get(position).getDescription());
                         ((ViewHolder) holder).mpost_date.setText(mPostdata.get(position).getDate());
-
-                        picasso.load("http://i.imgur.com/rFLNqWI.jpg")
-                                .fit()
-                                .placeholder(R.drawable.demo)
-                                .error(R.drawable.demo)
-                                .into(((ViewHolder) holder).mpost_image);
-
+                        loadimage(picasso , position,((ViewHolder) holder).mpost_image);
+                        break;
                     case cheesesquare:
 
-                        picasso.load("http://i.imgur.com/rFLNqWI.jpg")
-                                .fit()
-                                .placeholder(R.drawable.demo)
-                                .error(R.drawable.demo)
-                                .into(((ViewHolder) holder).mpost_image);
+                        loadimage(picasso , position,((ViewHolder) holder).mpost_image);
+                        break;
 
                     case simple_cardui:
 
                         ((ViewHolder) holder).mpost_description.setText(mPostdata.get(position).getDescription());
+
+                        break;
 
                     default:
 
@@ -154,12 +189,35 @@ public class Adapter_big_card<T extends IPostModel> extends RecyclerView.Adapter
             ((ViewHolder) holder).mpost_title.setText(mPostdata.get(position).getTitle());
 
 
-
-
-
         } else {
             ((ProgressViewHolder) holder).progressBar.setIndeterminate(true);
         }
+    }
+
+
+    /**
+     * Loading Image In RecyclerView Item ImageView
+     *
+     * @param picasso
+     * @param position of the RecyclerView
+     * @param imageView ImageView Of item to load image from network
+     */
+    public void loadimage(Picasso picasso , int position , ImageView imageView)
+    {
+        try
+        {
+            picasso.load(mPostdata.get(position).getImageSource())
+                    .fit()
+                    .placeholder(R.drawable.demo)
+                    .error(R.drawable.demo)
+                    .into(imageView);
+
+        }catch (IllegalArgumentException e)
+        {
+            Log.d(LOG_TAG , "Null image url");
+
+        }
+
     }
 
 

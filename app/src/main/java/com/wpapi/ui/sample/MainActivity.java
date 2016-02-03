@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.wpapi.ui.adapter.Adapter_big_card;
+import com.wpapi.ui.adapter.Awesome_Adapter;
 import com.wpapi.ui.sample.models.PostModel;
 import com.wpapi.ui.ui.LayoutUI;
 
@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0 ; i<20 ; i++)
         {
             PostModel postModel1 = new PostModel();
-            postModel1.setImageSource("Image");
+            postModel1.setImageSource("http://i.imgur.com/rFLNqWI.jpg");
             postModel1.setDate("1/2/2016");
             postModel1.setTitle("This the Demo of the Cheese And Google card ");
             postModel1.setDescription("Description");
             postModel.add(postModel1);
         }
 
-        Adapter_big_card<PostModel> adapter_big_card  = new Adapter_big_card(this , postModel , LayoutUI.simple_cardui );
+        Awesome_Adapter<PostModel> adapter_big_card  = new Awesome_Adapter(this , postModel , LayoutUI.google_card );
         recyclerView.setAdapter(adapter_big_card);
 
         setContentView(recyclerView);
@@ -45,22 +45,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 }
