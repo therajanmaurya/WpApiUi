@@ -68,6 +68,10 @@ public class Awesome_Adapter<T extends IPostModel> extends RecyclerView.Adapter<
                     mpost_description = (TextView) v.findViewById(R.id.post_description);
                     break;
 
+                case simple_cardui2:
+                    mpost_image = (ImageView) v.findViewById(R.id.post_image);
+                    break;
+
                 default:
             }
 
@@ -179,7 +183,10 @@ public class Awesome_Adapter<T extends IPostModel> extends RecyclerView.Adapter<
                     case simple_cardui:
 
                         ((ViewHolder) holder).mpost_description.setText(mPostdata.get(position).getDescription());
+                        break;
 
+                    case simple_cardui2:
+                        loadimage(picasso , position,((ViewHolder) holder).mpost_image);
                         break;
 
                     default:
@@ -207,7 +214,6 @@ public class Awesome_Adapter<T extends IPostModel> extends RecyclerView.Adapter<
         try
         {
             picasso.load(mPostdata.get(position).getImageSource())
-                    .fit()
                     .placeholder(R.drawable.demo)
                     .error(R.drawable.demo)
                     .into(imageView);

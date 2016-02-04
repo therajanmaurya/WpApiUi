@@ -7,7 +7,7 @@ import com.wpapi.ui.R;
  */
 public enum LayoutUI {
 
-    google_card, cheesesquare ,  simple_cardui;
+    google_card, cheesesquare ,  simple_cardui , simple_cardui2;
 
 
     public static int UI_Type(LayoutUI ui)
@@ -20,6 +20,8 @@ public enum LayoutUI {
                 return R.layout.item_cheesesqaure_list;
             case simple_cardui:
                 return R.layout.item_simple_card;
+            case simple_cardui2:
+                return R.layout.item_simple_card2;
             default:
                 return 0xffffff00;
         }

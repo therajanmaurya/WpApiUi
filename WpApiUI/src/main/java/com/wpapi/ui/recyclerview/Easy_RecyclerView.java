@@ -5,7 +5,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-
 import com.wpapi.ui.ui.LayoutManagerType;
 
 /**
@@ -49,7 +48,7 @@ public class Easy_RecyclerView
 
 
     /**
-     * Setting All the stuff of RecyclerView like SPAN_COUNT and LayoutManagerType
+     * Setting LinearLayout of RecyclerView like SPAN_COUNT and LayoutManagerType
      * @param layoutManagerType LayoutType (Grid or Linear)
      * @return Easy_RecyclerView
      */
@@ -59,6 +58,11 @@ public class Easy_RecyclerView
     }
 
 
+    /**
+     * Setting GridLayout of RecyclerView like SPAN_COUNT and LayoutManagerType
+     * @param layoutManagerType LayoutType (Grid or Linear)
+     * @return Easy_RecyclerView
+     */
     public RecyclerView SetLayoutManager(RecyclerView recyclerView,LayoutManagerType layoutManagerType , int columns)
     {
         this.SPAN_COUNT = columns;
@@ -66,6 +70,11 @@ public class Easy_RecyclerView
     }
 
 
+    /**
+     * Setting StaggeredGridLayoutManager of RecyclerView like SPAN_COUNT and LayoutManagerType
+     * @param layoutManagerType LayoutType (Grid or Linear)
+     * @return Easy_RecyclerView
+     */
     public RecyclerView SetLayoutManager(RecyclerView recyclerView,LayoutManagerType layoutManagerType , int columns , int orientation)
     {
         this.SPAN_COUNT = columns;
@@ -74,6 +83,12 @@ public class Easy_RecyclerView
     }
 
 
+    /**
+     * Setting fixed size of item after loaded and scroll to first
+     * @param recyclerView
+     * @param layoutManagerType
+     * @return
+     */
     public RecyclerView SetParameter(RecyclerView recyclerView,LayoutManagerType layoutManagerType)
     {
         int scrollPosition = 0;
@@ -110,8 +125,10 @@ public class Easy_RecyclerView
                 break;
             case STAGGERED_GRID_LAYOUT_MANAGER:
                 mLayoutManager = new StaggeredGridLayoutManager(SPAN_COUNT ,LinearLayoutManager.VERTICAL);
+                break;
             default:
-                mLayoutManager = new LinearLayoutManager(context);
+               mLayoutManager = new LinearLayoutManager(context);
+                break;
         }
     }
 
