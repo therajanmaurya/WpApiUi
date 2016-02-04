@@ -6,5 +6,6 @@ package com.wpapi.ui.ui;
 public enum LayoutManagerType {
 
     GRID_LAYOUT_MANAGER,
-    LINEAR_LAYOUT_MANAGER
+    LINEAR_LAYOUT_MANAGER,
+    STAGGERED_GRID_LAYOUT_MANAGER
 }

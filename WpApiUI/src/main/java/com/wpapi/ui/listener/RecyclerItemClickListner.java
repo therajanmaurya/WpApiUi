@@ -7,12 +7,10 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.wpapi.ui.recyclerview.Easy_RecyclerView;
-
 /**
  * Created by rajanmaurya on 12/8/15.
  */
-public class RecyclerItemClickListner implements Easy_RecyclerView.OnItemTouchListener {
+public class RecyclerItemClickListner implements RecyclerView.OnItemTouchListener {
 
     protected OnItemClickListener listener;
 

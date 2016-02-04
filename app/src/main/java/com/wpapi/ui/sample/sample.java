@@ -2,6 +2,8 @@ package com.wpapi.ui.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.wpapi.ui.adapter.Awesome_Adapter;
 import com.wpapi.ui.recyclerview.Easy_RecyclerView;
@@ -33,10 +35,10 @@ public class sample extends AppCompatActivity {
             postModel.add(postModel1);
         }
 
-        Easy_RecyclerView easy_recyclerView = (Easy_RecyclerView)findViewById(R.id.easy_recyclerview);
-        easy_recyclerView = easy_recyclerView.getRecyclerView(LayoutManagerType.LINEAR_LAYOUT_MANAGER);
+        RecyclerView easy_recyclerView = (RecyclerView)findViewById(R.id.easy_recyclerview);
+        easy_recyclerView = new Easy_RecyclerView(this).SetLayoutManager(easy_recyclerView , LayoutManagerType.STAGGERED_GRID_LAYOUT_MANAGER , 3 , StaggeredGridLayoutManager.VERTICAL);
 
-        Awesome_Adapter<PostModel> awesome_adapter  = new Awesome_Adapter(this , postModel , LayoutUI.google_card );
+        Awesome_Adapter<PostModel> awesome_adapter  = new Awesome_Adapter(this , postModel , LayoutUI.simple_cardui );
         easy_recyclerView.setAdapter(awesome_adapter);
 
     }
